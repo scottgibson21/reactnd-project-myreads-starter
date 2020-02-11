@@ -15,6 +15,7 @@ class Bookcase extends Component{
                   key={s.id}
                   shelfName={s.displayName} 
                   books={this.props.books.filter(book => book.shelf === s.id)}
+                  updateBook={this.props.updateBook}
                   />
               )}
             </div>
