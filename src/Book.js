@@ -20,7 +20,8 @@ function Book(props) {
                 />
             </div>
             <div className="book-title">{props.book.title}</div>
-            <div className="book-authors">{props.book.authors.join(", ")}</div>
+            {console.log(props.book)}
+            <div className="book-authors">{props.book.authors === undefined ? "no authors listed" : props.book.authors.join(", ")}</div>
         </div>
     )
 } 
