@@ -11,51 +11,52 @@ class BooksApp extends React.Component {
     showSearchPage: false
   }
 
-  shelves = [{
-    id: "currentlyReading",
-    displayName: "Currently Reading"
-  },{
-    id: "wantToRead",
-    displayName: "Want to Read"
-  },{
-    id: "read",
-    displayName: "Read"
-  }];
+  shelves = [
+    {
+      id: "wantToRead",
+      displayName: "Want to Read"
+    }, {
+      id: "currentlyReading",
+      displayName: "Currently Reading"
+    }, {
+      id: "read",
+      displayName: "Read"
+    }];
 
   updateBook = (book, shelfId) => {
     BooksAPI.update(book, shelfId)
-    .then(() => {
+      .then(() => {
         BooksAPI.getAll()
-        .then(books => {
-          this.setState({ books })
-        })
+          .then(books => {
+            this.setState({ books })
+          })
       })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     BooksAPI.getAll()
-    .then((books) => {
-      this.setState(() => ({
-        books
-      }))
-    })
+      .then((books) => {
+        this.setState(() => ({
+          books
+        }))
+      })
   }
 
   render() {
     return (
       <div className="app">
         <Route path='/Search' render={() => (
-          <BookSearch updateBook={this.updateBook}/>
-        )}/>
+          <BookSearch updateBook={this.updateBook} />
+        )} />
         <Route exact path='/' render={({ history }) => (
-          <Bookcase 
-          shelves={this.shelves} 
-          books={this.state.books} 
-          updateBook={(book, shelfId) => {
-            this.updateBook(book, shelfId)
-            history.push('/')
-          }}/>
-        )}/>
+          <Bookcase
+            shelves={this.shelves}
+            books={this.state.books}
+            updateBook={(book, shelfId) => {
+              this.updateBook(book, shelfId)
+              history.push('/')
+            }} />
+        )} />
       </div>
     )
   }

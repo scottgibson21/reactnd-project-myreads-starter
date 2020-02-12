@@ -10,7 +10,11 @@ function Book(props) {
                 style={{ 
                     width: 128, 
                     height: 193, 
-                    backgroundImage: `url(${props.book.imageLinks.smallThumbnail})`
+                    backgroundPosition: 'center',
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundImage: props.book.imageLinks === undefined ? 
+                        `url('BookImage.png')` : `url(${props.book.imageLinks.smallThumbnail})`
                     }}
                 ></div>
                 <BookSelector 
@@ -19,8 +23,7 @@ function Book(props) {
                 book={props.book}
                 />
             </div>
-            <div className="book-title">{props.book.title}</div>
-            {console.log(props.book)}
+            <div className="book-title">{props.book.title === undefined ? "No title found" : props.book.title}</div>
             <div className="book-authors">{props.book.authors === undefined ? "no authors listed" : props.book.authors.join(", ")}</div>
         </div>
     )
