@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function BookSelector(props) {
 
@@ -19,6 +20,12 @@ function BookSelector(props) {
             </select>
         </div>
     )
+}
+
+BookSelector.propTypes = {
+    book: PropTypes.object.isRequired,
+    bookShelf: PropTypes.string.isRequired,
+    updateBook: PropTypes.func.isRequired
 }
 
 export default BookSelector;

@@ -2,8 +2,13 @@ import React, { Component } from 'react'
 import SearchBar from './SearchBar'
 import * as BooksAPI from './BooksAPI'
 import SearchResults from './SearchResults'
+import PropTypes from 'prop-types'
 
 class BookSearch extends Component {
+
+    static propTypes = {
+        updateBook: PropTypes.func.isRequired
+    }
 
     state = {
         searchedBooks: []
