@@ -7,7 +7,7 @@ function BookSelector(props) {
         props.updateBook(props.book, event.target.value)
     }
 
-    const currentShelf = props.bookShelf === undefined ? "move" : props.bookShelf;
+    const currentShelf = props.bookShelf === undefined ? "none" : props.bookShelf;
 
     return (
         <div className="book-shelf-changer" onChange={handleChange}>

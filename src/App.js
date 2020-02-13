@@ -26,41 +26,41 @@ class BooksApp extends React.Component {
   updateBook = (book, shelfId) => {
     BooksAPI.update(book, shelfId)
       .then(() => {
-        this.setState((state) => {
-          let bookIndex = state.books.indexOf(book);
-          state.books[bookIndex].shelf = shelfId;
-          return { books: state.books }
-        })
+        BooksAPI.getAll()
+          .then((books) => {
+            this.setState({ books })
+          })
       })
   }
 
-  componentDidMount() {
-    BooksAPI.getAll()
-      .then((books) => {
-        this.setState(() => ({
-          books
-        }))
-      })
-  }
 
-  render() {
-    return (
-      <div className="app">
-        <Route path='/Search' render={() => (
-          <BookSearch updateBook={this.updateBook} />
-        )} />
-        <Route exact path='/' render={({ history }) => (
-          <Bookcase
-            shelves={this.shelves}
-            books={this.state.books}
-            updateBook={(book, shelfId) => {
-              this.updateBook(book, shelfId)
-              history.push('/')
-            }} />
-        )} />
-      </div>
-    )
-  }
+componentDidMount() {
+  BooksAPI.getAll()
+    .then((books) => {
+      this.setState(() => ({
+        books
+      }))
+    })
+}
+
+render() {
+  return (
+    <div className="app">
+      <Route path='/Search' render={() => (
+        <BookSearch books={this.state.books} updateBook={this.updateBook} />
+      )} />
+      <Route exact path='/' render={({ history }) => (
+        <Bookcase
+          shelves={this.shelves}
+          books={this.state.books}
+          updateBook={(book, shelfId) => {
+            this.updateBook(book, shelfId)
+            history.push('/')
+          }} />
+      )} />
+    </div>
+  )
+}
 }
 
 export default BooksApp
