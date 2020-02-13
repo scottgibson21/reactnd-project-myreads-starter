@@ -26,10 +26,11 @@ class BooksApp extends React.Component {
   updateBook = (book, shelfId) => {
     BooksAPI.update(book, shelfId)
       .then(() => {
-        BooksAPI.getAll()
-          .then(books => {
-            this.setState({ books })
-          })
+        this.setState((state) => {
+          let bookIndex = state.books.indexOf(book);
+          state.books[bookIndex].shelf = shelfId;
+          return { books: state.books }
+        })
       })
   }
 
