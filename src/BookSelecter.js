@@ -24,7 +24,7 @@ function BookSelector(props) {
 
 BookSelector.propTypes = {
     book: PropTypes.object.isRequired,
-    bookShelf: PropTypes.string.isRequired,
+    bookShelf: PropTypes.string,
     updateBook: PropTypes.func.isRequired
 }
 
